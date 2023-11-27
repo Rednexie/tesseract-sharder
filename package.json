@@ -1,0 +1,32 @@
+{
+  "name": "tesseract-sharder",
+  "version": "1.0.1",
+  "description": "Sharding module for Tesseract.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon .",
+    "cover": "istanbul instrument ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rednexie/tesseract-sharder.git"
+  },
+  "keywords": [
+    "tesseract",
+    "tesseract.js",
+    "ocr"
+  ],
+  "author": "Rednexie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rednexie/tesseract-sharder/issues"
+  },
+  "homepage": "https://github.com/Rednexie/tesseract-sharder#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "tesseract.js": "^5.0.3"
+  }
+}

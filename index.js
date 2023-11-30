@@ -95,18 +95,18 @@ class Sharder{
         return recognition.data
        }
    
-       async recognizeDir(path){
-        if(typeof path !== "string") throw new Error('The "path" argument should be typeof string, recieved ' + typeof path)
+       async recognizeDir(imgPath){
+        if(typeof imgPath !== "string") throw new Error('The "path" argument should be typeof string, recieved ' + typeof imgPath)
         let stats;
         try{
-            stats = await fs.promises.stat(path)
+            stats = await fs.promises.stat(imgPath)
         }
         catch(err){
             throw new Error('The "path" should exist and be accessible.');
         }
         if(!stats || !stats.isDirectory()) throw new Error('The "path" should be a directory.');
         
-        const files = await fs.promises.readdir(path)
+        const files = await fs.promises.readdir(imgPath)
         const images = files.filter(file => 
             file.endsWith(".png") ||
             file.endsWith(".jpg") ||
@@ -123,8 +123,10 @@ class Sharder{
                 options.logger = cb
                 const worker = await Tesseract.createWorker(this.language, this.oem, options);
                 images.forEach(async (file, index) => {
+                    options.logger = cb
+                    const worker = await Tesseract.createWorker(this.language, this.oem, options);
                     delete options.logger
-                    const recognition = await worker.recognize(file, options)
+                    const recognition = await worker.recognize(path.join(imgPath, file), options)
                     data.push(recognition.data);
                     if(data.length === images.length) return resolve(data)
                 })
